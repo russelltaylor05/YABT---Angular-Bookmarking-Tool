@@ -1,0 +1,20 @@
+<div>
+  <script type="text/ng-template" id="newCollectionContent.html">
+      <form name="formNewList" ng-submit="submit()">
+        <div class="modal-header"><h3 class="modal-title">{{modalTitle}}</h3></div>
+        <div class="modal-body">
+            <label for="listName">Name</label>
+            <input type="text" name="listName" placeholder="Add New List" ng-model="formData.listName">
+            <br>
+            <label for="listDesc">Description</label>
+            <input type="text" name="listDesc" placeholder="Add a description" ng-model="formData.listDesc">
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit">Add</button>
+          <a class="btn btn-warning" ng-click="cancel()">Cancel</a>
+        </div>
+      </form>
+      
+  </script>
+  <a class="btn btn-default" ng-click="open()">{{triggerText}}</a>
+</div>

@@ -1,0 +1,27 @@
+body {min-width: 700px;}
+
+#welcome {text-align: center;}
+
+#lists {width: 30%; float: left;}
+#lists > div {padding: 20px;}
+#lists .list-group .remove {float: right;}
+
+#links {width: 70%; float: right;}
+#links > div {padding: 20px;}
+#links  {}
+#links h2 {margin-top: 0; padding-top: 0;}
+
+#links .list-group-item .date {padding: 0 10px; margin: 0; color: #cccc; line-height: 1;}
+
+#links .link-header {padding: 10px; background: #efefef; margin: 20px 0;}
+
+#links .link-filters {float: right;}
+
+#links .new-link {float: left;}
+
+.modal-backdrop {background: black;}
+
+.cf {
+  overflow: auto;
+  zoom: 1;
+}
