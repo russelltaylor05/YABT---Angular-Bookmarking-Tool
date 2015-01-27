@@ -8,20 +8,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Linky App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet/less" type="text/css"  href="app.less">
   
+
+  <script src="bower_components/less.js/dist/less.js"></script>   
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
   
+  <div id="outer-container">
   
-  <div class="page-header">
-    <h1>YALM <small>Yet Another Link Manager</small></h1>
-  </div>  
+    <div class="page-header">
+      <h1><a href="#/">YABT</a></h1>
+      <p class="tag">Yet Another Bookmarking Tool</p>
+    </div>  
 
-  <div class="content" ng-view></div>
+    <div class="content" ng-view></div>
+  </div><!-- /outer-container -->
 
 
   <script src="bower_components/angular/angular.js"></script>
@@ -34,7 +41,5 @@
   <script src="app.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
- 
-
 </body>
 </html>

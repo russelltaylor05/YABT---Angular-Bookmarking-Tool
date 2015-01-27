@@ -9,8 +9,8 @@ function ($scope, $routeParams, $location, linkService) {
   var currentListId = $scope.currentListId = $routeParams.listId; 
   
   $scope.listLinks = linkService.getLinks(currentListId);  
+  $scope.orderProp = 'date';
 
-  
   
   $scope.addLink = function() {    
 
@@ -24,7 +24,7 @@ function ($scope, $routeParams, $location, linkService) {
     }    
 
     linkService.addLink(newLink, currentListId);
-    $scope.newLink = "";
+    $scope.formData.newLink = "";
   }; 
   
   $scope.removeLink = function(link) {    

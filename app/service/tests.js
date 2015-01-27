@@ -10,6 +10,7 @@ describe('linky service factory tests for Lists', function () {
    var newList = {
      id: 1,
      title: "Hello World",
+     description: "Hi there",
      created: new Date(),
      links : []
    };
@@ -17,7 +18,6 @@ describe('linky service factory tests for Lists', function () {
    it('should add a new list', function () {
      linkService.addList(newList);
      expect(linkService.lists.length).toEqual(1);
-     expect(linkService.getList(1)).toEqual(newList);     
    });
 
    it('should update list', function () {

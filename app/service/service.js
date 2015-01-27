@@ -24,20 +24,25 @@ angular.module ('linkyService', [
     },
 
     addList: function(list) {
-      var newId = 0;      
+      var newId = 0;
+      
+      var newList = {
+        title: list.title,
+        description: (list.description) ? list.description : "This is a description of a Collection.",
+        created: new Date(),
+        links : []
+      }
+      if(newList.title.length == 0) return -1;
+            
       for(var key in data.lists) {
         if(data.lists[key].id > newId) {
           newId = data.lists[key].id;
         }
       }
+      
       newId++;
-      var newList = {
-        id : newId,
-        title : list.title,
-        description : list.description,        
-        created : list.created,
-        links : []
-      };
+      newList.id = newId;
+      
       data.lists.push(newList);      
       return newId;
     },
@@ -45,7 +50,8 @@ angular.module ('linkyService', [
     updateList : function(list) {
       for(var key in data.lists) {
         if(data.lists[key].id == list.id) {
-          data.lists[key] = list;
+          data.lists[key].title = list.title;
+          data.lists[key].description = list.description;
         }
       }
     },

@@ -10,19 +10,12 @@ function ($scope, $routeParams, $location, linkService) {
   var lists = $scope.lists = linkService.lists;
   
   $scope.addList = function() {
-    newList = {
-      title: $scope.formData.newList,
-      description: "This is a description of your list",
-      created: new Date()
-    }
-    if(newList.title.length == 0) return;
-    for(var key in $scope.lists) { 
-      if($scope.lists[key].title == newList.title) return;
-    }    
-    var newId = linkService.addList(newList);
-    $scope.newList = "";
-    
-    $location.path("/list/" + newId);
+    var newId = linkService.addList({title: $scope.formData.newList});
+    if(newId > 0) {
+      $location.path("/list/" + newId);  
+    } else {
+      // add error
+    }        
   };
 
   $scope.removeList = function(listId) {
@@ -43,8 +36,7 @@ function ($scope, $routeParams, $location, linkService) {
   }
   
   $scope.listIsActive = function(checkId) {
-    return checkId == currentListId;
-    
+    return checkId == currentListId; 
   }
   
   $scope.atLeastOneList = function() {
@@ -58,36 +50,33 @@ function ($scope, $routeParams, $location, linkService) {
 }])
 
 
-
-.controller('listModalInst', [ '$scope', '$modalInstance', '$location', 'linkService',
-function ($scope, $modalInstance, $location, linkService) {
+.controller('editListModalCtrl', function ($scope, $modal, $log) {
   
-  var newList = {};  
+  $scope.open = function (size) {    
 
-  $scope.submit = function() {
-    var description = ($scope.formData.listDesc) ? $scope.formData.listDesc : "This is a description of your collection";
-    newList = {
-      title: $scope.formData.listName,
-      description: description,
-      created: new Date()
-    }
-    
-    if(newList.title.length == 0) return;
-    for(var key in $scope.lists) { 
-      if($scope.lists[key].title == newList.title) return;
-    }    
-    var newId = linkService.addList(newList);
-    $scope.newList = "";
-
-    $modalInstance.close();
-    $location.path("/list/" + newId);
-    
-  }
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
+    var modalInstance = $modal.open({
+      templateUrl: 'editCollectionContent.html',
+      controller: function($scope, $modalInstance, $location, $routeParams, linkService) {
+        var currentListId = $scope.currentListId = $routeParams.listId;   
+        $scope.formData = {}
+        $scope.formData.listName = linkService.getList(currentListId).title;
+        $scope.formData.listDesc = linkService.getList(currentListId).description;
+        
+        $scope.submit = function() {
+          linkService.updateList({id: currentListId, title: $scope.formData.listName, description: $scope.formData.listDesc});
+          $modalInstance.close();          
+        }
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+        
+      },
+      backdrop: true,
+      size: size,
+    });
   };
-}])
+})
+
 
 .controller('listModalCtrl', function ($scope, $modal, $log) {
   
@@ -95,16 +84,24 @@ function ($scope, $modalInstance, $location, linkService) {
 
     var modalInstance = $modal.open({
       templateUrl: 'newCollectionContent.html',
-      controller: 'listModalInst',
+      controller: function($scope, $modalInstance, $location, linkService) {
+        $scope.submit = function() {
+          var newId = linkService.addList({title: $scope.formData.listName, description: $scope.formData.listDesc});
+          if(newId > 0) {
+            $modalInstance.close();
+            $location.path("/list/" + newId);  
+          } else {
+            //add error
+          }
+        }
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+        
+      },
       backdrop: true,
       size: size,
-      resolve: {
-        items: function () {
-          return $scope.formNewList;
-        }
-      }
     });
-
   };
 });
 

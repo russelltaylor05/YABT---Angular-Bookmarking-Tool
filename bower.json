@@ -1,5 +1,5 @@
 {
-  "name": "angular-seed",
+  "name": "YABT - Angular Bookmarking Tool",
   "description": "A starter project for AngularJS",
   "version": "0.0.0",
   "homepage": "https://github.com/angular/angular-seed",
@@ -10,6 +10,8 @@
     "angular-route": "1.2.x",
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
-    "angular-bootstrap": "~0.12.0"
+    "angular-bootstrap": "~0.12.0",
+    "fontawesome": "~4.3.0",
+    "less.js": "~2.3.0"
   }
 }

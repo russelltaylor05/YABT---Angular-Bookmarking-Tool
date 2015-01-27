@@ -1,83 +1,115 @@
 
 <div id="welcome" ng-hide="atLeastOneList()">
-  <h1>Hi There!!</h1>
-  <h1>Looks like you don't have any lists</h1>
-  <p>To get started create your first list</p>
+  <div>
+    <h1>Welcome! Looks like you're new.</h1>
+    <p>Get started by creating your first Collection</p>
 
-  <form ng-submit="addList()">
-    <input type="text" placeholder="Add New List" ng-model="formData.newList">
-    <input type="submit" class="btn">
-  </form>
+    <form ng-submit="addList()">
+      <input type="text" placeholder="Title" ng-model="formData.newList">
+      <input type="submit" class="btn" value="Create">
+    </form>
+  </div>
 </div>
 
 
-<div id="lists" ng-show="atLeastOneList()">
+<div id="container" class="cf" ng-show="atLeastOneList()">
+  
+<div id="lists" >
   <div>  
     <ul class="list-group">
       <li class="list-group-item" ng-repeat="list in lists" ng-class="{ active: listIsActive(list.id) }">
-        ({{list.links.length}}) 
-        <a ng-href="#/list/{{list.id}}">{{ list.title }}</a>        
-        <a class="remove" href="" ng-click="removeList(list.id)">Delete</a> 
+        <a ng-href="#/list/{{list.id}}"><i class="fa fa-list"></i> {{ list.title }}</a>        
+        <a class="remove" href="" ng-click="removeList(list.id)">X</a> 
       </li>
     </ul>
 
    <div ng-controller="listModalCtrl">
       <script type="text/ng-template" id="newCollectionContent.html">
-          <form name="formNewList" ng-submit="submit()">
+          <form name="formNewList" class="overlay" ng-submit="submit()">
             <div class="modal-header"><h3 class="modal-title">Add a New Collection</h3></div>
             <div class="modal-body">
-                <label for="listName">Name</label>
-                <input type="text" name="listName" placeholder="Add New List" ng-model="formData.listName">
-                <br>
-                <label for="listDesc">Description</label>
-                <input type="text" name="listDesc" placeholder="Add a description" ng-model="formData.listDesc">
+                <div class="form-item first">
+                  <label for="listName">Name</label>
+                  <input type="text" name="listName" placeholder="" ng-model="formData.listName">
+                </div>
+                <div class="form-item last">
+                  <label for="listDesc">Description</label>
+                  <input type="text" name="listDesc" placeholder="" ng-model="formData.listDesc">
+                </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-primary" type="submit">Add</button>
-              <a class="btn btn-warning" ng-click="cancel()">Cancel</a>
+              <button class="btn submit" type="submit">Add</button>
+              <a class="btn cancel" ng-click="cancel()">Cancel</a>
             </div>
           </form>
       </script>
-      <a class="btn btn-default" ng-click="open()">+ Add Collection</a>
+      <a class="btn add-list" ng-click="open()">+ Add Collection</a>
     </div>
 
-    <a href="" ng-click="reset()">Reset</a><br><br>
+    <a href="" class="clear-local" ng-click="reset()">Clear LocalStorage</a><br><br>
     
   </div>
 </div>
 
 
-<div id="links" ng-show="atLeastOneList()" ng-controller="myLinks">
+<div id="links" ng-controller="myLinks">
     <div class="no-links" ng-show="!currentListId">
       Select or Create a list on the left to get started!
     </div>
     <div ng-show="currentListId">
-      <h2>{{listTitle()}}</h2>
-      <h5>{{listDescription()}} </h5>
+      <h2><i class="fa fa-list"></i>{{listTitle()}}</h2>
+      <h5>
+        {{listDescription()}} 
+         <div ng-controller="editListModalCtrl" class="edit-container">
+            <script type="text/ng-template" id="editCollectionContent.html">
+                <form name="formNewList" class="overlay" ng-submit="submit()">
+                  <div class="modal-header"><h3 class="modal-title">Edit Collection</h3></div>
+                  <div class="modal-body">
+                      <div class="form-item first">
+                        <label for="listName">Name</label>
+                        <input type="text" name="listName" placeholder="" ng-model="formData.listName" >
+                      </div>
+                      <div class="form-item last">
+                        <label for="listDesc">Description</label>
+                        <input type="text" name="listDesc" placeholder="" ng-model="formData.listDesc" >
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn submit" type="submit">Update</button>
+                    <a class="btn cancel" ng-click="cancel()">Cancel</a>
+                  </div>
+                </form>
+            </script>
+            <a class="edit-list" href="" ng-click="open()">Edit Collection</a>
+          </div>        
+      
+      </h5>
       
       <div class="link-header cf">
         <form name="linkForm" ng-submit="addLink()" class="new-link">
-          <input type="text" name="link" placeholder="Add New URL" ng-model="formData.newLink">
-          <input type="submit" class="btn btn-primary">
+          <input type="text" name="link" placeholder="New URL" ng-model="formData.newLink">
+          <input type="submit" class="btn" value="+">
         </form>    
         <div class="link-filters">
-          <label>Filter: </label>
-          <input type="text" ng-model="linkSearch">
           <label>Sort By: </label>
-          <select>
-            <option>New</option>
-            <option>Title</option>
+          <select ng-model="orderProp">
+            <option value="date">New</option>
+            <option value="title">Title</option>
           </select>
+          <input type="text" name="filter" ng-model="linkSearch" placeholder="Filter">
         </div>
       </div>
+      <p ng-hide="listLinks.length > 0">To get started, add your first link!</p>
+        
       <ul class="list-group">
-        <li ng-repeat="link in listLinks | filter : linkSearch" class="list-group-item">
-          <a href="{{link.title}}">{{link.title}}</a>
+        <li ng-repeat="link in listLinks | orderBy:orderProp | filter : linkSearch " class="list-group-item">
+          <a href="{{link.title}}" class="link">{{link.title}}</a>
           <a class="remove pull-right" href="" ng-click="removeLink(link)">X</a>
-          <p class='pull-right date'>{{link.created | date}}<p>
-
+          <p class='pull-right date'>{{link.created | date}}</p>
         </li>
       </ul>
     
     </div>  
 </div>
+
+</div><!-- /container -->

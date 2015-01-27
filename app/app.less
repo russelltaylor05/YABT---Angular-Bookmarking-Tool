@@ -1,0 +1,127 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700);
+
+@link-green: #00b07b;
+@header-green: #00b07b;
+@side-green: #00885e;
+@heading-grey: #525252;
+@light-grey: #9b9b9b;
+@button-orange: #ff4700;
+@side-hover-green: #1a946e;
+
+
+* {font-family: 'Roboto', sans-serif; color: #fffff;}
+html { font-size: 62.5%; } 
+body {min-width: 800px; font-size: 1.0rem;}
+h1, h1 a, h2, h3, h4 {font-family: 'Roboto Slab', serif;}
+a {color: @link-green;}
+a:hover {color: darken(@link-green, 10%);}
+input[type="text"] {padding: 4px 8px; border: 1px solid #d0d0d0; box-shadow: inset 1px 1px 3px rgba(0,0,0,.2); color: @light-grey; font-size: 1.4rem; font-weight: 300;}
+.btn:active {box-shadow: none;}
+
+html,
+body,
+#outer-container,
+#container,
+.content {height: 100%}
+
+body { font-size: 1.4rem; } /* =14px */
+h1   { font-size: 2.4rem; } /* =24px */
+
+.list-group, 
+.list-group-item,
+.list-group-item:first-child,
+.list-group-item:last-child {background: none; border: none; box-shadow: none; border-radius: 0;}
+
+
+#outer-container {position: relative;}
+#lists,
+#links {padding-top: 12rem;}
+
+
+.page-header {position: absolute; top: 0; right: 0; left: 0;}
+.page-header {margin: 0; padding: 2rem 3rem; background: @header-green; border: none;}
+.page-header h1 {margin: 0 2rem 0 0; padding: 0; color: #ffffff; font-size: 4.0rem; line-height: 4.0rem; float: left;}
+.page-header h1 a {color: #fff; font-style: none;}
+.page-header p.tag {margin: 0; font-size: 2.0rem; line-height: 4.0rem; font-weight: 200; color: #fff; display: block;}
+
+
+#welcome {height: 100%; text-align: center; background: @side-green; color: #fff;}
+#welcome > div {padding-top: 20rem;}
+#welcome h1 {margin: 0 0 5rem 0; padding: 0; font-size: 5.5rem}
+#welcome p {font-weight: 200; margin: 0 0 5rem 0; font-size: 3rem;}
+#welcome input[type="text"] {padding: 6px 10px; width: 200px; margin: 0 10px 0 0;}
+#welcome .btn {padding: 7px 15px 6px 15px; background: @button-orange; border-radius: 0; font-weight: 300; position: relative; top: -1px}
+#welcome .btn:hover {text-decoration: none; background: darken(@button-orange, 5%); color: #fff;}
+
+#lists {width: 30%; float: left; background: @side-green; height: 100%; text-align: center;}
+#lists > div {padding: 0rem 0; }
+#lists .list-group {margin: 0 0 4rem 0; text-align: left;}
+#lists .list-group .remove {float: right;}
+#lists .list-group-item {padding: 1.5rem 3rem;}
+#lists .list-group-item a {color: #fff; text-shadow: none; text-decoration: none;  font-size: 1.8rem; font-weight: 300;}
+#lists .list-group-item i {margin: 0 0.7rem 0 0;}
+#lists .list-group-item.active {background: #fff;}
+#lists .list-group-item.active a {color: @side-green;}
+#lists .add-list { color: #fff; font-size: 2.2rem; font-weight: 200; margin: 0 auto; border-radius: 0;}
+#lists .add-list:hover {background: @side-hover-green;}
+#lists .clear-local {position: absolute; bottom: 5rem; left: 3rem;}
+
+
+
+#links {width: 70%; float: right;}
+#links > div {padding: 0 4rem;}
+#links  {}
+#links h2 {margin-top: 0; padding-top: 1.5rem; color: @heading-grey;}
+#links h2 i {margin: 0 15px 0 0;}
+#links h5 {font-weight: 300; color: @light-grey; font-size: 1.6rem}
+
+#links .link-header {padding: 10px 0; margin: 20px 0; border-top: #d0d0d0 1px solid; border-bottom: #d0d0d0 1px solid;}
+#links .link-header .btn {margin: 0; padding: 4px 15px 4px 15px; background: @button-orange; font-size: 1.4rem; color: #fff; border-radius: 1px; border: 1px solid @button-orange; vertical-align: top; font-size: 2rem; line-height: 1; font-weight: 300;}
+#links .link-header .btn:hover {background: darken(@button-orange, 5%)}
+#links .link-header input[name="link"] {margin: 0 5px 0 0; width: 250px;}
+#links .link-header input[name="filter"] {margin: 0 0 0 25px;}
+#links .link-header label {margin: 0 5px 0 0; color: @light-grey; font-weight: 300;}
+#links .link-filters {float: right;}
+#links .new-link {float: left;}
+
+#links .list-group-item {padding: 1.5rem 4rem 1.5rem 0; border-bottom: #efefef 1px solid; position: relative;}
+#links .list-group-item:last-child {border-bottom: none;}
+#links .list-group-item .link {font-weight: 300; font-size: 1.6rem; text-decoration: underline; line-height: 1.6rem;}
+#links .list-group-item .date {padding: 0 10px; margin: 0; color: lighten(@light-grey,20%); line-height: 1; font-weight: 300; font-size: 1.3rem; line-height: 1.6rem; position: relative; top: 2px;}
+#links .list-group-item .remove {padding: 0 1.5rem; line-height: 4.6rem; position: absolute; top: 0; right: 0; bottom :0;  display: block; color: @light-grey;}
+#links .list-group-item .remove:hover {text-decoration: none; color: #fff; background: #fd5050;}
+
+#links .edit-container {display: inline;}
+#links .edit-list {text-decoration: underline;}
+
+.modal-backdrop {background: black;}
+
+.overlay h3 {color: @heading-grey; font-weight: 300; font-size: 3.2rem;}
+.overlay label {width: 150px; margin: 0 10px 0 0;  text-align: right; color: #777777; font-size: 1.8rem; font-weight: 300;}
+.overlay .form-item.first {margin: 0 0 30px 0;}
+.overlay .modal-body {padding: 30px 0;}
+.overlay input[name="listDesc"] {width: 300px;}
+.overlay button {padding: 10px 20px; background: @button-orange; border-radius: 0; color: #fff; font-weight: 300;}
+.overlay button:hover {color: #fff; background: darken(@button-orange, 5%);}
+
+
+.cf {
+  overflow: auto;
+  zoom: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
