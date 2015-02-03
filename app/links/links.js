@@ -29,6 +29,6 @@ function ($scope, $routeParams, $location, linkService) {
   
   $scope.removeLink = function(link) {    
     linkService.removeLink(link, currentListId);
-  };    
+  };
   
 }]);

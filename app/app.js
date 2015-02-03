@@ -5,9 +5,9 @@ angular.module('linkyApp', [
   'ngRoute',
   'ngStorage',
   'ui.bootstrap',
+  'linkyService',
   'collectionController',
   'linkController',
-  'linkyService',
 ])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -15,7 +15,7 @@ angular.module('linkyApp', [
   $routeProvider. 
     when('/list/:listId', {
       templateUrl: 'view.html',
-      controller: 'myLists',
+      controller: 'myCollections',
       resolve: {
         validation: function ($q, $route, linkService) {
           var deferred = $q.defer(), foundId = false;
@@ -37,7 +37,7 @@ angular.module('linkyApp', [
     }).
     otherwise({
       templateUrl: 'view.html',      
-      controller: 'myLists',      
+      controller: 'myCollections',      
       redirectTo: '/'
     });
 }]);

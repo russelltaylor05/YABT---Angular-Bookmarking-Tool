@@ -1,16 +1,18 @@
 'use strict';
 
+
 angular.module ('collectionController', [])
 
-.controller('myLists', ['$scope', '$routeParams', '$location', 'linkService', 
+.controller('myCollections', ['$scope', '$routeParams', '$location', 'linkService', 
 function ($scope, $routeParams, $location, linkService) {
   
   var newList = "";
   var currentListId = $scope.currentListId = $routeParams.listId;   
   var lists = $scope.lists = linkService.lists;
   
-  $scope.addList = function() {
-    var newId = linkService.addList({title: $scope.formData.newList});
+  $scope.addList = function(title) {
+    //var newId = linkService.addList({title: $scope.formData.newList});
+    var newId = linkService.addList({title: title});    
     if(newId > 0) {
       $location.path("/list/" + newId);  
     } else {

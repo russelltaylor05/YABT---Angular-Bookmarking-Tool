@@ -24,8 +24,7 @@ describe('linky service factory tests for Lists', function () {
      linkService.addList(newList);
      newList.title = "Updated Title";
      linkService.updateList(newList);          
-     expect(linkService.getList(1)).toEqual(newList);     
-     expect(linkService.getList(1).title).toEqual("Updated Title");     
+     expect(linkService.getList(1).title).toEqual(newList.title);
    });
 
    it('should delete list', function () {
